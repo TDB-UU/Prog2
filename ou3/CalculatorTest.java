@@ -1,8 +1,15 @@
-import org.junit.*;
-import junit.framework.TestCase;
 import java.io.*;
 import java.util.*;
+import junit.framework.TestCase;
+import org.junit.*;
 
+/**
+ * Test class for Calculator in assignment 3 in Computer programming II
+ * (1TD722): Numeric calculator.
+ *
+ * @author Malin Kallen
+ * @version 2
+ */
 public class CalculatorTest extends TestCase {
   private PrintStream stdout;
   private InputStream stdin;
@@ -38,26 +45,26 @@ public class CalculatorTest extends TestCase {
   
   
   /**
-   * Verify that statement in Calculator generates a one-line output containing
-   * the string "Evaluation error" (possibly with lower-case e) and thereafter
+   * Verify that statement in Calculator generates a one-line output starting
+   * with "> ***Evaluation error" (possibly with lower-case e) and thereafter
    * continues parsing next line after having parsed the specified statement.
    * 
    * @param statement Statement which should cause an evaluation error
    */
   private void verifyEvaluationError(String statement) {
-    verifyStatement("> .*[E|e]valuation error.+\n> 3.0\n", statement + "3\n", 2);
+    verifyStatement("> \\*\\*\\*\\s*[E|e]valuation error.+\n> 3.0\n", statement + "3\n", 2);
   }
   
   /**
    * Verify that statement in Calculator generates a two-line output, where the
-   * first line contains the string "Syntax error" (possibly with lower-case s)
+   * first line starting with "> ***Syntax error" (possibly with lower-case s)
    * and thereafter continues parsing next line after having parsed the specified
    * statement.
    * 
    * @param statement Statement which should cause an evaluation error
    */
   private void verifySyntaxError(String statement) {
-    verifyStatement("> .*[S|s]yntax error.+\n.+\n> 3.0\n", statement + "3\n", 2);
+    verifyStatement("> \\*\\*\\*\\s*[S|s]yntax error.+\n.+\n> 3.0\n", statement + "3\n", 2);
   }
   
   /**
@@ -80,11 +87,10 @@ public class CalculatorTest extends TestCase {
       }
     } catch (Exception e) {
       System.setIn(stdin);
+      System.setOut(stdout);
       fail("Exception of type " + e.getClass() + " thrown for statement " + statements);
     }
 
-    System.err.print(output);
-    System.err.print(expectedOutput);
     assertTrue(output.toString().matches(expectedOutput));
   }
 }

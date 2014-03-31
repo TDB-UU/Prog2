@@ -1,8 +1,15 @@
-import org.junit.*;
-import junit.framework.TestCase;
 import java.io.*;
 import java.util.*;
+import junit.framework.TestCase;
+import org.junit.*;
 
+/**
+ * Test class for Parser in assignment 3 in Computer programming II
+ * (1TD722): Numeric calculator.
+ *
+ * @author Malin Kallen
+ * @version 2
+ */
 public class ParserTest extends TestCase {
   private InputStream stdin;
   private Map<String, Double> variables;
@@ -77,7 +84,7 @@ public class ParserTest extends TestCase {
     try {
       assertEquals(expectedResult, parser.assignment(), 1e-8);
     } catch (Exception e) {
-      System.setIn(stdin);
+      System.setIn(stdin);	// We must reset System.in before terminating
       fail("Exception of type " + e.getClass() + " thrown for statement " + statement);
     }
   }

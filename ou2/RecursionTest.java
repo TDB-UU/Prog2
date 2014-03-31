@@ -1,7 +1,16 @@
+
 import org.junit.*;
 import junit.framework.TestCase;
+
 import java.io.*;
 
+/**
+ * Test class for assignment 2 in Computer programming II (1TD722):
+ * Small exercises on recursion.
+ *
+ * @author Malin Kallen
+ * @version 2
+ */
 public class RecursionTest extends TestCase {
   
   // Note: Exercise 10 and 12 must be checked man
@@ -27,16 +36,16 @@ public class RecursionTest extends TestCase {
   @Test
   public void testMultiplicera() {
     // Multiplication with 0 --> 0
-    assertEquals(0, Recursion.multiplicera(0, 0), 0);
-    assertEquals(0, Recursion.multiplicera(5, 0), 0);
+    assertEquals(0, Recursion.multiply(0, 0), 0);
+    assertEquals(0, Recursion.multiply(5, 0), 0);
     
     // Multiplication with 1 --> same number
-    assertEquals(5, Recursion.multiplicera(5, 1), 0);
-    assertEquals(5, Recursion.multiplicera(1, 5), 0);
+    assertEquals(5, Recursion.multiply(5, 1), 0);
+    assertEquals(5, Recursion.multiply(1, 5), 0);
     
     // Some higer numbers
-    assertEquals(25, Recursion.multiplicera(5, 5), 0);
-    assertEquals(100, Recursion.multiplicera(5, 20), 0);
+    assertEquals(25, Recursion.multiply(5, 5), 0);
+    assertEquals(100, Recursion.multiply(5, 20), 0);
   }
   
   /////////////////// Exercise 4 ///////////////////
@@ -142,10 +151,10 @@ public class RecursionTest extends TestCase {
   private void checkHanoi(char from, char to, char help, int n, String expectedOutput) {
     PrintStream stdout = System.out;
     
-    ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    System.setOut(new PrintStream(outContent));
+    ByteArrayOutputStream output = new ByteArrayOutputStream();
+    System.setOut(new PrintStream(output));
     Recursion.hanoi(from, to, help, n);
-    assertTrue(outContent.toString().matches(expectedOutput));
+    assertTrue(output.toString().matches(expectedOutput));
     
     System.setOut(stdout);
   }
@@ -162,11 +171,11 @@ public class RecursionTest extends TestCase {
     PrintStream stdout = System.out;
     InputStream stdin = System.in;
     
-    OutputStream outContent = new ByteArrayOutputStream();
-    System.setOut(new PrintStream(outContent));
+    OutputStream output = new ByteArrayOutputStream();
+    System.setOut(new PrintStream(output));
     System.setIn(new ByteArrayInputStream(input.getBytes()));
     Recursion.reverseNumbers();
-    assertTrue(outContent.toString().matches(expectedOutput));
+    assertTrue(output.toString().matches(expectedOutput));
     
     System.setIn(stdin);
     System.setOut(stdout);
@@ -181,7 +190,7 @@ public class RecursionTest extends TestCase {
    * @return Regular expression which should match the string written by hanoi when a disc is moved from "from" to "to"
    */
   private String expectedHanoiRow(char from, char to) {
-    return ".*" + from + ".+" + to + ".*\n";
+    return "\\s*" + from + "\\s*->\\s*" + to + "\\s*\n";
   }
   
 }
