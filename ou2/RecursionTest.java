@@ -125,7 +125,7 @@ public class RecursionTest extends TestCase {
     checkReverseNumbers("254685", "\\s?254685\\s\\s?");
 
     // Several numbers -> The numbers in reverse order
-    checkReverseNumbers("232 56 94 85 123654 2 5 985",
+    checkReverseNumbers("232\n56\n94\n85\n123654\n2\n5\n985",
     "\\s?985\\s\\s?5\\s\\s?2\\s\\s?123654\\s\\s?85\\s\\s?94\\s\\s?56\\s\\s?232\\s\\s?");
     
     // Non-digit -> Empty string (up to 2 whitespaces)
