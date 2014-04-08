@@ -1,16 +1,23 @@
 import java.io.*;
 import java.util.*;
-import junit.framework.TestCase;
-import org.junit.*;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
+import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 /**
  * Test class for Parser in assignment 3 in Computer programming II
  * (1TD722): Numeric calculator.
  *
  * @author Malin Kallen
- * @version 2
+ * @version 3
  */
-public class ParserTest extends TestCase {
+@RunWith(JUnit4.class)
+public class ParserTest {
   private InputStream stdin;
   private Map<String, Double> variables;
   

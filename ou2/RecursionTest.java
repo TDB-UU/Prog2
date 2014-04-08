@@ -1,17 +1,20 @@
 
-import org.junit.*;
-import junit.framework.TestCase;
-
 import java.io.*;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
+
+import static org.junit.Assert.*;
 
 /**
  * Test class for assignment 2 in Computer programming II (1TD722):
  * Small exercises on recursion.
  *
  * @author Malin Kallen
- * @version 2
+ * @version 3
  */
-public class RecursionTest extends TestCase {
+@RunWith(JUnit4.class)
+public class RecursionTest {
   
   // Note: Exercise 10 and 12 must be checked man
   

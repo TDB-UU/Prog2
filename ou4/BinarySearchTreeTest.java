@@ -1,14 +1,20 @@
-import junit.framework.TestCase;
-import org.junit.*;
+
+import org.junit.Before;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
+import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 /**
  * Test class for BinarySearchTree in assignment 4 in Computer programming II
  * (1TD722): Small exercises on lists and binary search trees.
  *
  * @author Malin Kallen
- * @version 1
+ * @version 2
  */
-public class BinarySearchTreeTest extends TestCase {
+@RunWith(JUnit4.class)
+public class BinarySearchTreeTest {
   
   BinarySearchTree nonEmptyTree;
   BinarySearchTree emptyTree;
