@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
  * Small exercises on recursion.
  *
  * @author Malin Kallen
- * @version 3
+ * @version 4
  */
 @RunWith(JUnit4.class)
 public class RecursionTest {
@@ -124,21 +124,21 @@ public class RecursionTest {
   @Test
   public void testReverseNumbers() throws IOException {
     // One number -> The number itself
-    checkReverseNumbers("1", "\\s?1\\s\\s?");
+    checkReverseNumbers("1", "\\s?1\\s{0,2}");
 
     // One number > 10 -> Still the number itself
-    checkReverseNumbers("254685", "\\s?254685\\s\\s?");
+    checkReverseNumbers("254685", "\\s?254685\\s{0,2}");
 
     // Several numbers -> The numbers in reverse order
     checkReverseNumbers("232\n56\n94\n85\n123654\n2\n5\n985",
-    "\\s?985\\s\\s?5\\s\\s?2\\s\\s?123654\\s\\s?85\\s\\s?94\\s\\s?56\\s\\s?232\\s\\s?");
+    "\\s?985\\s{1,2}5\\s{1,2}2\\s{1,2}123654\\s{1,2}85\\s{1,2}94\\s{1,2}56\\s{1,2}232\\s{0,2}");
     
     // Non-digit -> Empty string (up to 2 whitespaces)
-    checkReverseNumbers("apa", "\\s?\\s?");
+    checkReverseNumbers("apa", "\\s{0,2}");
     
     // Non digit between numbers -> Numbers before non-digit token in revers order
     checkReverseNumbers("232 56 end 94 85 123654 2 5 985",
-    "\\s?56\\s\\s?232\\s\\s?");
+    "\\s?56\\s{1,2}232\\s{0,2}");
   }
   
   /////////////////// Help methods ///////////////////
