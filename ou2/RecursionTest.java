@@ -69,6 +69,8 @@ public class RecursionTest extends TestCase {
     assertEquals(1, Recursion.largest(testArray, 0));  
     int [] longerTestArray = {5, 7, 0, 32, 45};
     assertEquals(5, Recursion.largest(longerTestArray, 0));
+    int [] negativeTestArray = {-57, -74, -106, -32, -45};
+    assertEquals(-32, Recursion.largest(negativeTestArray, 4));
     
     // Larger index --> Largest element among elements 0,...,i
     assertEquals(7, Recursion.largest(longerTestArray, 1));
