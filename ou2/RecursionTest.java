@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
  * Small exercises on recursion.
  *
  * @author Malin Kallen
- * @version 4
+ * @version 5
  */
 @RunWith(JUnit4.class)
 public class RecursionTest {
@@ -136,8 +136,8 @@ public class RecursionTest {
     // Non-digit -> Empty string (up to 2 whitespaces)
     checkReverseNumbers("apa", "\\s{0,2}");
     
-    // Non digit between numbers -> Numbers before non-digit token in revers order
-    checkReverseNumbers("232 56 end 94 85 123654 2 5 985",
+    // Non digit between numbers -> Numbers before non-digit token in reverse order
+    checkReverseNumbers("232\n56\nend\n94\n85\n123654\n2\n5\n985",
     "\\s?56\\s{1,2}232\\s{0,2}");
   }
   
