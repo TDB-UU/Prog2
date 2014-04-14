@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
  * (1TD722): Small exercises on lists and binary search trees.
  *
  * @author Malin Kallen
- * @version 2
+ * @version 3
  */
 @RunWith(JUnit4.class)
 public class BinarySearchTreeTest {
@@ -35,66 +35,79 @@ public class BinarySearchTreeTest {
   
   @Test
   public void testSize() {
-    assertEquals(0, emptyTree.size());
-    assertEquals(8, nonEmptyTree.size());
+    assertEquals("Size of empty tree", 0, emptyTree.size());
+    assertEquals("Size of non-empty tree", 8, nonEmptyTree.size());
   }
   
   @Test
   public void testHeight() {
-    assertEquals(0, emptyTree.height());
-    assertEquals(4, nonEmptyTree.height());
+    assertEquals("Height of empty tree", 0, emptyTree.height());
+    assertEquals("Height of non-empty tree", 4, nonEmptyTree.height());
   }
   
   @Test
   public void testContains() {
-    assertFalse(emptyTree.contains("Keron"));
-    assertFalse(emptyTree.contains("Stour Jierat"));
-    assertFalse(nonEmptyTree.contains("Lapporten"));
-    assertTrue(nonEmptyTree.contains("Keron"));
-    assertTrue(nonEmptyTree.contains("Stour Jierta"));
-    assertTrue(nonEmptyTree.contains("Akka"));
+    assertFalse("Empty tree contains", emptyTree.contains("Keron"));
+    assertFalse("Empty tree contains", emptyTree.contains("Stour Jierta"));
+    assertFalse("Non-empty tree contains 'Lapporten'",
+    		nonEmptyTree.contains("Lapporten"));
+    assertTrue("Non-empty tree contains 'Keron'",
+    		nonEmptyTree.contains("Keron"));
+    assertTrue("Non-empty tree contains 'Stour Jierta'",
+    		nonEmptyTree.contains("Stour Jierta"));
+    assertTrue("Non-empty tree contains 'Akka'",
+    		nonEmptyTree.contains("Akka"));
   }
   
   @Test
   public void testCopy() {
     // A copy of a tree should be equal to the tree itself...
     BinarySearchTree anotherEmptyTree = emptyTree.copy();
-    assertTrue(anotherEmptyTree.equals(emptyTree));
+    assertTrue("Empty tree equals copy of itself",
+    		anotherEmptyTree.equals(emptyTree));
     BinarySearchTree anotherNonEmptyTree = nonEmptyTree.copy();
-    assertTrue(anotherNonEmptyTree.equals(nonEmptyTree));
+    assertTrue("Non-empty tree equals copy of itself",
+    		anotherNonEmptyTree.equals(nonEmptyTree));
     // Inserting into the copy should not change the original tree.
     anotherNonEmptyTree.insert("Vistas");
-    assertFalse(anotherNonEmptyTree.equals(nonEmptyTree));
+    assertFalse("Non-empty tree equals modified copy of itself",
+    		anotherNonEmptyTree.equals(nonEmptyTree));
     // Inserting into the original tree should not change the copy.
     nonEmptyTree.insert("Vistas");
-    assertTrue(anotherNonEmptyTree.equals(nonEmptyTree));
+    assertTrue("Modified non-empty tree equals copy of itself",
+    		anotherNonEmptyTree.equals(nonEmptyTree));
     nonEmptyTree.insert("Tarfala");
-    assertFalse(anotherNonEmptyTree.equals(nonEmptyTree));
+    assertFalse("Twice modified non-empty tree equals copy of itself",
+    		anotherNonEmptyTree.equals(nonEmptyTree));
   }
   
   @Test
   public void testEquals() {
     // A tree is equal to itself
-    assertTrue(emptyTree.equals(emptyTree));
-    assertTrue(nonEmptyTree.equals(nonEmptyTree));
+    assertTrue("Empty tree equals itself", emptyTree.equals(emptyTree));
+    assertTrue("Non-empty tree equals itself",
+    		nonEmptyTree.equals(nonEmptyTree));
     // Two empty trees are equal
     BinarySearchTree anotherEmptyTree = new BinarySearchTree();
-    assertTrue(anotherEmptyTree.equals(emptyTree));
+    assertTrue("Two empty trees are equal", anotherEmptyTree.equals(emptyTree));
     // A tree is equal to a copy of itself
     BinarySearchTree anotherNonEmptyTree = nonEmptyTree.copy();
-    assertTrue(anotherNonEmptyTree.equals(nonEmptyTree));
+    assertTrue("Non-empty tree equals copy of itself",
+    		anotherNonEmptyTree.equals(nonEmptyTree));
     // Inserting in different order --> Not (necessarily) equal
     nonEmptyTree.insert("Nallo");
     nonEmptyTree.insert("Njulla");
     anotherNonEmptyTree.insert("Njulla");
     anotherNonEmptyTree.insert("Nallo");
-    assertFalse(nonEmptyTree.equals(anotherNonEmptyTree));
+    assertFalse("Non-empty trees equal after insertion in different order",
+    		nonEmptyTree.equals(anotherNonEmptyTree));
   }
   
   @Test
   public void testIPL() {
-    assertEquals(0, emptyTree.ipl());
-    assertEquals(23, nonEmptyTree.ipl());
+    assertEquals("Internal path length of empty tree", 0, emptyTree.ipl());
+    assertEquals("Internal path length of non-empty tree", 23,
+    		nonEmptyTree.ipl());
   }
   
 }

@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
  * (1TD722): Numeric calculator.
  *
  * @author Malin Kallen
- * @version 3
+ * @version 4
  */
 @RunWith(JUnit4.class)
 public class CalculatorTest {
@@ -97,6 +97,6 @@ public class CalculatorTest {
       fail("Exception of type " + e.getClass() + " thrown for statement " + statements);
     }
 
-    assertTrue(output.toString().matches(expectedOutput));
+    assertTrue(statements, output.toString().matches(expectedOutput));
   }
 }

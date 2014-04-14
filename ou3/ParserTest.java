@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
  * (1TD722): Numeric calculator.
  *
  * @author Malin Kallen
- * @version 3
+ * @version 4
  */
 @RunWith(JUnit4.class)
 public class ParserTest {
@@ -89,7 +89,7 @@ public class ParserTest {
   private void verifyCalculation(double expectedResult, String statement) {
     Parser parser = createParser(statement);
     try {
-      assertEquals(expectedResult, parser.assignment(), 1e-8);
+      assertEquals(statement, expectedResult, parser.assignment(), 1e-8);
     } catch (Exception e) {
       System.setIn(stdin);	// We must reset System.in before terminating
       fail("Exception of type " + e.getClass() + " thrown for statement " + statement);
@@ -110,7 +110,7 @@ public class ParserTest {
     } catch (EvaluationException e) {
       evaluationExceptionThrown = true;
     }
-    assertTrue(evaluationExceptionThrown);
+    assertTrue("Expected evaluation exception for" + statement, evaluationExceptionThrown);
   }
   
   /**
@@ -127,7 +127,7 @@ public class ParserTest {
     } catch (SyntaxException e) {
       syntaxExceptionThrown = true;
     }
-    assertTrue(syntaxExceptionThrown);
+    assertTrue("Expected syntax exception for" + statement, syntaxExceptionThrown);
   }
 
 }

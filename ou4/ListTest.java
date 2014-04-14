@@ -10,7 +10,7 @@ import org.junit.runners.JUnit4;
  * (1TD722): Small exercises on lists and binary search trees.
  *
  * @author Malin Kallen
- * @version 2
+ * @version 3
  */
 @RunWith(JUnit4.class)
 public class ListTest {
@@ -32,29 +32,33 @@ public class ListTest {
   @Test
   public void testLength() {
     // Length of an empty list is 0
-    assertEquals(0, emptyList.length());
+    assertEquals("Length of empty list", 0, emptyList.length());
     // Length of a non-empty list is the number of elements
-    assertEquals(5, nonEmptyList.length());    
+    assertEquals("Length of non-empty list", 5, nonEmptyList.length());    
   }
   
   @Test
   public void testContains() {
     // An empty list doesn't contain any elements...
-    assertFalse(emptyList.contains(0));
-    assertFalse(emptyList.contains(21));
+    assertFalse("Empty list contains 0", emptyList.contains(0));
+    assertFalse("Empty list contains 21", emptyList.contains(21));
     // First element shall be found
-    assertTrue(nonEmptyList.contains(21));
+    assertTrue("Non-empty list contains first element",
+    		nonEmptyList.contains(21));
     // Element in the middle of the list as well
-    assertTrue(nonEmptyList.contains(52));
+    assertTrue("Non-empty list contains element in the middle",
+    		nonEmptyList.contains(52));
     // ... and the last element
-    assertTrue(nonEmptyList.contains(100));
+    assertTrue("Non-empty list contains last-element",
+    		nonEmptyList.contains(100));
     // ... but not an element which is not there
-    assertFalse(nonEmptyList.contains(0));
+    assertFalse("Non-empty list contains non-existing element",
+    		nonEmptyList.contains(0));
   }
   
   @Test
   public void testGetLast() {
-    assertEquals(100, nonEmptyList.getLast());
+    assertEquals("getLast", 100, nonEmptyList.getLast());
   }
   
   @Test(expected=ListException.class)
@@ -64,11 +68,11 @@ public class ListTest {
   
   @Test
   public void testAtIndex() {
-    assertEquals(21, nonEmptyList.atIndex(0));
-    assertEquals(37, nonEmptyList.atIndex(1));
-    assertEquals(40, nonEmptyList.atIndex(2));
-    assertEquals(52, nonEmptyList.atIndex(3));
-    assertEquals(100, nonEmptyList.atIndex(4));
+    assertEquals("Element 0 in non-empty list", 21, nonEmptyList.atIndex(0));
+    assertEquals("Element 1 in non-empty list", 37, nonEmptyList.atIndex(1));
+    assertEquals("Element 2 in non-empty list", 40, nonEmptyList.atIndex(2));
+    assertEquals("Element 3 in non-empty list", 52, nonEmptyList.atIndex(3));
+    assertEquals("Element 4 in non-empty list", 100, nonEmptyList.atIndex(4));
   }
   
   @Test(expected=ListException.class)
@@ -78,7 +82,7 @@ public class ListTest {
   
   @Test(expected=ListException.class)
   public void testAtIndex_negativeNumber() {
-	  emptyList.atIndex(-1);
+	  nonEmptyList.atIndex(-1);
   }
   
   @Test(expected=ListException.class)
@@ -88,12 +92,13 @@ public class ListTest {
   
   @Test
   public void testRemoveFirst() {
-    assertEquals(21, nonEmptyList.removeFirst());
-    assertEquals(37, nonEmptyList.removeFirst());
-    assertEquals(40, nonEmptyList.removeFirst());
-    assertEquals(52, nonEmptyList.removeFirst());
-    assertEquals(100, nonEmptyList.removeFirst());
-    assertEquals(0, nonEmptyList.length());
+    assertEquals("removeFirst, first call", 21, nonEmptyList.removeFirst());
+    assertEquals("removeFirst, second call", 37, nonEmptyList.removeFirst());
+    assertEquals("removeFirst, third call", 40, nonEmptyList.removeFirst());
+    assertEquals("removeFirst, fourth call", 52, nonEmptyList.removeFirst());
+    assertEquals("removeFirst, fifth call", 100, nonEmptyList.removeFirst());
+    assertEquals("Length after 5 calls to removeFirst", 0,
+    		nonEmptyList.length());
   }
   
   @Test(expected=ListException.class)
@@ -103,12 +108,13 @@ public class ListTest {
   
   @Test
   public void testRemoveLast() {
-    assertEquals(100, nonEmptyList.removeLast());
-    assertEquals(52, nonEmptyList.removeLast());
-    assertEquals(40, nonEmptyList.removeLast());
-    assertEquals(37, nonEmptyList.removeLast());
-    assertEquals(21, nonEmptyList.removeLast());
-    assertEquals(0, nonEmptyList.length());
+    assertEquals("removeLast, first call", 100, nonEmptyList.removeLast());
+    assertEquals("removeLast, second call", 52, nonEmptyList.removeLast());
+    assertEquals("removeLast, third call", 40, nonEmptyList.removeLast());
+    assertEquals("removeLast, fourth call", 37, nonEmptyList.removeLast());
+    assertEquals("removeLast, fifth call", 21, nonEmptyList.removeLast());
+    assertEquals("Length after 5 calls to removeLast", 0,
+    		nonEmptyList.length());
   }
   
   @Test(expected=ListException.class)
@@ -119,22 +125,28 @@ public class ListTest {
   @Test
   public void testEquals() {
     // A list is equal to itself
-    assertTrue(emptyList.equals(emptyList));
-    assertTrue(nonEmptyList.equals(nonEmptyList));
+    assertTrue("Empty list equals itself", emptyList.equals(emptyList));
+    assertTrue("Non-empty list equals itself",
+    		nonEmptyList.equals(nonEmptyList));
     // ... and to an identical list
     List anotherEmptyList = new List();
-    assertTrue(emptyList.equals(anotherEmptyList));
+    assertTrue("Empty list equals other empty list",
+    		emptyList.equals(anotherEmptyList));
     // ... or a copy of itself
     List nonEmptyCopy = nonEmptyList.copy();
-    assertTrue(nonEmptyList.equals(nonEmptyCopy));
+    assertTrue("Non-empty list equals its copy",
+    		nonEmptyList.equals(nonEmptyCopy));
     // ... unless the identical list or copy is modified
     nonEmptyCopy.putFirst(3);
-    assertFalse(nonEmptyList.equals(nonEmptyCopy));    
+    assertFalse("Non-empty list equals its copy after insertion",
+    		nonEmptyList.equals(nonEmptyCopy));    
     // ... even if the length becomes the same (but the values different)
     nonEmptyCopy.removeLast();
-    assertFalse(nonEmptyList.equals(nonEmptyCopy));
+    assertFalse("Non-empty list equals its copy after insertion and deletion",
+    		nonEmptyList.equals(nonEmptyCopy));
     // An empty list is different from a non-empty list
-    assertFalse(emptyList.equals(nonEmptyList));
+    assertFalse("Empty list equals non-empty list",
+    		emptyList.equals(nonEmptyList));
   }
   
   @Test
@@ -142,41 +154,57 @@ public class ListTest {
     List intersection;
     // The intersection of an empty list and another empty list is empty
     intersection = emptyList.intersection(emptyList);
-    assertEquals(0, intersection.length());
+    assertEquals("Length of intersection of empty list with itself", 0,
+    		intersection.length());
     List anotherEmptyList = emptyList.copy();
     intersection = emptyList.intersection(anotherEmptyList);
-    assertEquals(0, intersection.length());
+    assertEquals("Length of intersection of two empty lists", 0,
+    		intersection.length());
     // Actually, the intersection of an empty list and any list is empty
     intersection = emptyList.intersection(nonEmptyList);
-    assertEquals(0, intersection.length());
+    assertEquals("Length of intersection of empty and non-empty list", 0,
+    		intersection.length());
     // And so is the intersection of two lists with no elements equal
     List anotherNonEmptyList = new List();
     anotherNonEmptyList.putFirst(2);
     anotherNonEmptyList.putFirst(1);
     intersection = nonEmptyList.intersection(anotherNonEmptyList);
-    assertEquals(0, intersection.length());
+    assertEquals("Length of intersection of disjuctive non-empty lists", 0,
+    		intersection.length());
     // An intersection of a list by itself is a copy of the list
     intersection = nonEmptyList.intersection(nonEmptyList);
-    assertTrue(intersection.equals(nonEmptyList));
+    assertTrue("Intersection of list by itself",
+    		intersection.equals(nonEmptyList));
     intersection = anotherNonEmptyList.intersection(anotherNonEmptyList);
-    assertTrue(intersection.equals(anotherNonEmptyList));
+    assertTrue("Intersection of another list by itself",
+    		intersection.equals(anotherNonEmptyList));
     // And finally, the intersection of two lists which only partly overlap
     anotherNonEmptyList.insert(37);
     anotherNonEmptyList.insert(52);
     anotherNonEmptyList.insert(572);
     intersection = nonEmptyList.intersection(anotherNonEmptyList);
-    assertEquals(2, intersection.length());
-    assertEquals(37, intersection.atIndex(0));
-    assertEquals(52, intersection.atIndex(1));
+    assertEquals("Length of intersection of partly overlapping lists", 2,
+    		intersection.length());
+    assertEquals("First element of partly overlapping lists", 37,
+    		intersection.atIndex(0));
+    assertEquals("Second element of partly overlapping lists", 52,
+    		intersection.atIndex(1));
     // Intersection may not modify the list!
+    assertEquals("Empty list after intersecion calls", 0, emptyList.length());
+    assertEquals("The other empty list after intersection calls", 0,
+    		anotherEmptyList.length());
+    assertEquals("Length of non-empty list after calls to instersection", 5,
+    		anotherNonEmptyList.length());
+    assertEquals("First element of non-empty list after calls to instersection",
+    		1, anotherNonEmptyList.atIndex(0));
+    assertEquals("Second element of non-empty list after calls to instersection",
+    		2, anotherNonEmptyList.atIndex(1));
+    assertEquals("Third element of non-empty list after calls to instersection",
+    		37, anotherNonEmptyList.atIndex(2));
+    assertEquals("Fourth element of non-empty list after calls to instersection",
+    		52, anotherNonEmptyList.atIndex(3));
+    assertEquals("Fifth element of non-empty list after calls to instersection",
+    		572, anotherNonEmptyList.atIndex(4));
     testAtIndex();
-    assertEquals(0, emptyList.length());
-    assertEquals(0, anotherEmptyList.length());
-    assertEquals(5, anotherNonEmptyList.length());
-    assertEquals(1, anotherNonEmptyList.atIndex(0));
-    assertEquals(2, anotherNonEmptyList.atIndex(1));
-    assertEquals(37, anotherNonEmptyList.atIndex(2));
-    assertEquals(52, anotherNonEmptyList.atIndex(3));
-    assertEquals(572, anotherNonEmptyList.atIndex(4));
   }  
 }
