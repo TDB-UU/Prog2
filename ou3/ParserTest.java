@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
  * (1TD722): Numeric calculator.
  *
  * @author Malin Kallen
- * @version 4
+ * @version 5
  */
 @RunWith(JUnit4.class)
 public class ParserTest {
@@ -49,7 +49,7 @@ public class ParserTest {
   }
   
   @Test
-  public void testExcpetions() {
+  public void testExceptions() {
     verifySyntaxExceptionThrown("1++2");
     verifySyntaxExceptionThrown("1**2");
     verifyEvaluationExceptionThrown("1/0");
@@ -57,6 +57,8 @@ public class ParserTest {
     verifySyntaxExceptionThrown("1+2=3+4**x - 1/0");
     verifySyntaxExceptionThrown("1+2*(3-1 a");
     verifySyntaxExceptionThrown("1+2+3+");
+    verifySyntaxExceptionThrown("1+?");
+    verifySyntaxExceptionThrown("3/#");
   }
   
   @After
