@@ -9,7 +9,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Test class for Calculator in assignment 3 in Computer programming II
+ * Test class for Calculator in assignment 2 (vt2015) in Computer programming II
  * (1TD722): Numeric calculator.
  *
  * @author Malin Kallen

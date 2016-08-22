@@ -10,7 +10,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Test class for Parser in assignment 3 in Computer programming II
+ * Test class for Parser an assignment 2 (vt2016) in Computer programming II
  * (1TD722): Numeric calculator.
  *
  * @author Malin Kallen
