@@ -1,5 +1,3 @@
-package recursion;
-
 import java.io.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,14 +10,12 @@ import static org.junit.Assert.*;
  * Small exercises on recursion.
  *
  * @author Malin Kallen
- * @version 6
+ * @version 7
  * 
  * Edited by Johan Ofverstedt 2015-03-30
  */
 @RunWith(JUnit4.class)
 public class RecursionTest {
-  
-  // Note: Exercise 10 and 12 must be checked man
   
   /////////////////// Exercise 1 ///////////////////
   @Test
@@ -88,49 +84,9 @@ public class RecursionTest {
     assertEquals("Largest 3", 32, Recursion.largest(longerTestArray, 3));
     assertEquals("Largest 4", 45, Recursion.largest(longerTestArray, 4));
   }
-   
-  /** Not used ht15
-  /////////////////// Exercise 9 ///////////////////
-  @Test
-  public void testBricklek() {
-    // 1 disc
-    String expectedOutput = expectedRow('A', 'B');
-    checkBricklek('A', 'B', 'C', 1, expectedOutput, "1 disc");
-    
-    // 2 discs
-    expectedOutput = expectedRow('A', 'C')
-      + expectedRow('A', 'B')
-      + expectedRow('C', 'B');
-    checkBricklek('A', 'B', 'C', 2, expectedOutput, "2 discs");
-    
-    // 2 discs, other names
-    expectedOutput = expectedRow('M', 'K')
-      + expectedRow('M', 'H')
-      + expectedRow('K', 'H');
-    checkBricklek('M', 'H', 'K', 2, expectedOutput, "Other disc names");
-    
-    // 4 discs
-    expectedOutput = expectedRow('A', 'C')
-      + expectedRow('A', 'B')
-      + expectedRow('C', 'B')
-      + expectedRow('A', 'C')
-      + expectedRow('B', 'A')
-      + expectedRow('B', 'C')
-      + expectedRow('A', 'C')
-      + expectedRow('A', 'B')
-      + expectedRow('C', 'B')
-      + expectedRow('C', 'A')
-      + expectedRow('B', 'A')
-      + expectedRow('C', 'B')
-      + expectedRow('A', 'C')
-      + expectedRow('A', 'B')
-      + expectedRow('C', 'B');
-    checkBricklek('A', 'B', 'C', 4, expectedOutput, "4 discs");
-  }
   
- */
   
-  /////////////////// Exercise 17 ///////////////////
+  /////////////////// Exercise 12 ///////////////////
   @Test
   public void testReverseNumbers() throws IOException {
     // One number -> The number itself
@@ -154,29 +110,6 @@ public class RecursionTest {
   
   /////////////////// Help methods ///////////////////
   /**
-   * Verify that Recursion.bricklek writes a string matching the provided regular
-   * expression to System.out when called with the provided arguments (from, to,
-   * help, n).
-   * 
-   * @param from First argument to bricklek
-   * @param to Second argument to bricklek
-   * @param help Third argument to bricklek
-   * @param n Fourth argument to bricklek
-   * @param expectedOutput Regular expression which the string written to System.out by bricklek should match
-   * @param message Identification message for AssertionError
-   */
-  private void checkBricklek(char from, char to, char help, int n, String expectedOutput, String message) {
-    PrintStream stdout = System.out;
-    
-    ByteArrayOutputStream output = new ByteArrayOutputStream();
-    System.setOut(new PrintStream(output));
-    Recursion.bricklek(from, to, help, n);
-    assertTrue(message, output.toString().matches(expectedOutput));
-    
-    System.setOut(stdout);
-  }
-  
-  /**
    * Verify that a call to Recursion.reverseNumbers writes a string matching the
    * provided regular expression to System.out when the provided string is
    * written to System.in.
@@ -189,17 +122,4 @@ public class RecursionTest {
     String output = Recursion.reverseNumbers(new java.util.Scanner(input));
     assertTrue(message, output.matches(expectedOutput));
   }
-  
-  /**
-   * Generate a regular expression which matches the string which can be expected
-   * to be written by bricklek when a disc is moved from one rod to another.
-   * 
-   * @param to Name of rod which the disc is moved from
-   * @param from Name of rod which the disc is moved to
-   * @return Regular expression which should match the string written by bricklek when a disc is moved from "from" to "to"
-   */
-  private String expectedRow(char from, char to) {
-    return "\\s*" + from + "\\s*->\\s*" + to + "\\s*\n";
-  }
-  
 }
