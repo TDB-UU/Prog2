@@ -10,23 +10,25 @@ import org.junit.runners.JUnit4;
  * (1TD722): Small exercises on lists and binary search trees.
  *
  * @author Malin Kallen, Tom Smedsaas, Johan Ofverstedt
- * @version 6
+ * @version 7
  */
 @RunWith(JUnit4.class)
 public class SortedListTest {
   
-  SortedList nonEmptyList;
-  SortedList emptyList;
+  SortedList nonEmptyList, nonEmptyListCopy;
+  SortedList emptyList, emptyListCopy;
   
   @Before
   public void setUp() {
     emptyList = new SortedList();
+    emptyListCopy = emptyList.copy();
     nonEmptyList = new SortedList();
     nonEmptyList.add(100);
     nonEmptyList.add(52);
     nonEmptyList.add(40);
     nonEmptyList.add(37);
     nonEmptyList.add(21);
+    nonEmptyListCopy = nonEmptyList.copy();
   }
   
   @Test
@@ -46,6 +48,11 @@ public class SortedListTest {
     // ... but not an element which is not there
     assertFalse("Non-empty list contains non-existing element",
       nonEmptyList.contains(0));
+    // Verify that contains didn't modify the list
+    assertTrue("Empty list modified by contains.",
+            emptyList.equals(emptyListCopy));
+    assertTrue("Non-empty list modified by contains.",
+            nonEmptyList.equals(nonEmptyListCopy));
   }
   
   @Test
@@ -65,11 +72,19 @@ public class SortedListTest {
     // ... but not an element which is not there
     assertFalse("Non-empty list contains non-existing element",
       nonEmptyList.containsIter(0));
+    // Verify that containsIter didn't modify the list
+    assertTrue("Empty list modified by containsIter.",
+            emptyList.equals(emptyListCopy));
+    assertTrue("Non-empty list modified by containsIter.",
+            nonEmptyList.equals(nonEmptyListCopy));
   }
     
   @Test
   public void testGetLast() {
     assertEquals("getLast", 100, nonEmptyList.getLast());
+ // Verify that getLast didn't modify the list
+    assertTrue("List modified by getLast.",
+            nonEmptyList.equals(nonEmptyListCopy));
   }
   
   @Test(expected=SortedList.ListException.class)
@@ -80,6 +95,9 @@ public class SortedListTest {
   @Test
   public void testGetLastIter() {
     assertEquals("getLastIter", 100, nonEmptyList.getLastIter());
+ // Verify that getLastIter didn't modify the list
+    assertTrue("List modified by getLastIter.",
+            nonEmptyList.equals(nonEmptyListCopy));
   }
   
   @Test(expected=SortedList.ListException.class)
@@ -94,6 +112,9 @@ public class SortedListTest {
     assertEquals("Element 2 in non-empty list", 40, nonEmptyList.atIndex(2));
     assertEquals("Element 3 in non-empty list", 52, nonEmptyList.atIndex(3));
     assertEquals("Element 4 in non-empty list", 100, nonEmptyList.atIndex(4));
+    // Verify that atIndex didn't modify the list
+    assertTrue("List modified by atIndex.",
+            nonEmptyList.equals(nonEmptyListCopy));
   }
   
   @Test(expected=SortedList.ListException.class)
@@ -119,6 +140,9 @@ public class SortedListTest {
      assertEquals("Value 52 in non-empty list", 3, nonEmptyList.indexOf(52));
      assertEquals("Value 100 in non-empty list", 4, nonEmptyList.indexOf(100)); 
      assertEquals("Value 99 in non-empty list", -1, nonEmptyList.indexOf(99));
+     // Verify that indexOf didn't modify the list
+     assertTrue("List modified by indexOf.",
+             nonEmptyList.equals(nonEmptyListCopy));
   }
   
   @Test
@@ -163,8 +187,7 @@ public class SortedListTest {
     merged = emptyList.merge(emptyList);
     assertEquals("Length of intersection of empty list with itself", 0,
       merged.size());
-    SortedList anotherEmptyList = emptyList.copy();
-    merged = emptyList.merge(anotherEmptyList);
+    merged = emptyList.merge(emptyListCopy);
     assertEquals("Length of intersection of two empty lists", 0,
       merged.size());
     // Merging empty and non-empty list --> A copy of the non-empty list
@@ -185,10 +208,10 @@ public class SortedListTest {
     expectedMerged.add(2); expectedMerged.add(2);
     assertTrue(expectedMerged.equals(merged));
     // Merging two lists that partly overlap --> All elements from both lists
-    // And finally, the intersection of two lists which only partly overlap
     anotherNonEmptyList.add(37);
     anotherNonEmptyList.add(52);
     anotherNonEmptyList.add(572);
+    SortedList anotherNonEmptyListCopy = anotherNonEmptyList.copy();
     merged = nonEmptyList.merge(anotherNonEmptyList);
     expectedMerged = nonEmptyList.copy();
     expectedMerged.add(572);
@@ -196,6 +219,13 @@ public class SortedListTest {
     expectedMerged.add(37);
     expectedMerged.add(2);
     expectedMerged.add(1);
+    assertTrue("Merging partly overlapping lists",
+            merged.equals(expectedMerged));
+    // Verify that merge didn't modify the lists
+    assertTrue("List modified by merge.",
+            nonEmptyList.equals(nonEmptyListCopy));
+    assertTrue("List modified by merge.",
+            anotherNonEmptyList.equals(anotherNonEmptyListCopy));
   }
  
   @Test
@@ -223,6 +253,8 @@ public class SortedListTest {
     // An empty list is different from a non-empty list
     assertFalse("Empty list equals non-empty list",
       emptyList.equals(nonEmptyList));
+    // Verify that equals didn't modify the lists
+    assertTrue("List modified by equals", nonEmptyList.equals(nonEmptyListCopy));
   }
     
 }
