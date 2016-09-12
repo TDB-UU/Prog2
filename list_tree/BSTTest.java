@@ -8,30 +8,30 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Test class for BinarySearchTree in an assignment in Computer programming II
+ * Test class for BST in an assignment in Computer programming II
  * (1TD722): Small exercises on lists and binary search trees.
  *
- * @author Malin Kallen
- * @version 4 (2015-04-22 by ts)
+ * @author Malin Kallen, Tom Smedsaas
+ * @version 5
  */
 @RunWith(JUnit4.class)
-public class BinarySearchTreeTest {
+public class BSTTest {
   
-  BinarySearchTree nonEmptyTree;
-  BinarySearchTree emptyTree;
+  BST nonEmptyTree;
+  BST emptyTree;
   
   @Before
   public void setUp() {
-    emptyTree = new BinarySearchTree();
-    nonEmptyTree = new BinarySearchTree();
-    nonEmptyTree.insert("Keron");
-    nonEmptyTree.insert("Akka");
-    nonEmptyTree.insert("Rusjka");
-    nonEmptyTree.insert("Kebnekaise");
-    nonEmptyTree.insert("Unna Avrrik");
-    nonEmptyTree.insert("Drakryggen");
-    nonEmptyTree.insert("Stour Jierta");
-    nonEmptyTree.insert("Unna Sievgok");
+    emptyTree = new BST();
+    nonEmptyTree = new BST();
+    nonEmptyTree.add("Keron");
+    nonEmptyTree.add("Akka");
+    nonEmptyTree.add("Rusjka");
+    nonEmptyTree.add("Kebnekaise");
+    nonEmptyTree.add("Unna Avrrik");
+    nonEmptyTree.add("Drakryggen");
+    nonEmptyTree.add("Stour Jierta");
+    nonEmptyTree.add("Unna Sievgok");
   }
   
   @Test
@@ -41,7 +41,7 @@ public class BinarySearchTreeTest {
   }
   
     
-  @Test(expected=BinarySearchTree.TreeException.class)
+  @Test(expected=BST.BSTException.class)
   public void testSmallestFromEmptyTree(){
      emptyTree.smallest();
   }
@@ -75,21 +75,21 @@ public class BinarySearchTreeTest {
   @Test
   public void testCopy() {
     // A copy of a tree should be equal to the tree itself...
-    BinarySearchTree anotherEmptyTree = emptyTree.copy();
+    BST anotherEmptyTree = emptyTree.copy();
     assertTrue("Empty tree equals copy of itself",
       anotherEmptyTree.equals(emptyTree));
-    BinarySearchTree anotherNonEmptyTree = nonEmptyTree.copy();
+    BST anotherNonEmptyTree = nonEmptyTree.copy();
     assertTrue("Non-empty tree equals copy of itself",
       anotherNonEmptyTree.equals(nonEmptyTree));
     // Inserting into the copy should not change the original tree.
-    anotherNonEmptyTree.insert("Vistas");
+    anotherNonEmptyTree.add("Vistas");
     assertFalse("Non-empty tree equals modified copy of itself",
       anotherNonEmptyTree.equals(nonEmptyTree));
     // Inserting into the original tree should not change the copy.
-    nonEmptyTree.insert("Vistas");
+    nonEmptyTree.add("Vistas");
     assertTrue("Modified non-empty tree equals copy of itself",
       anotherNonEmptyTree.equals(nonEmptyTree));
-    nonEmptyTree.insert("Tarfala");
+    nonEmptyTree.add("Tarfala");
     assertFalse("Twice modified non-empty tree equals copy of itself",
       anotherNonEmptyTree.equals(nonEmptyTree));
   }
@@ -101,18 +101,18 @@ public class BinarySearchTreeTest {
     assertTrue("Non-empty tree equals itself",
       nonEmptyTree.equals(nonEmptyTree));
     // Two empty trees are equal
-    BinarySearchTree anotherEmptyTree = new BinarySearchTree();
+    BST anotherEmptyTree = new BST();
     assertTrue("Two empty trees are equal", anotherEmptyTree.equals(emptyTree));
     // A tree is equal to a copy of itself
-    BinarySearchTree anotherNonEmptyTree = nonEmptyTree.copy();
+    BST anotherNonEmptyTree = nonEmptyTree.copy();
     assertTrue("Non-empty tree equals copy of itself",
       anotherNonEmptyTree.equals(nonEmptyTree));
     // Inserting in different order --> Not (necessarily) equal
-    nonEmptyTree.insert("Nallo");
-    nonEmptyTree.insert("Njulla");
-    anotherNonEmptyTree.insert("Njulla");
-    anotherNonEmptyTree.insert("Nallo");
-    assertFalse("Non-empty trees equal after insertion in different order",
+    nonEmptyTree.add("Nallo");
+    nonEmptyTree.add("Njulla");
+    anotherNonEmptyTree.add("Njulla");
+    anotherNonEmptyTree.add("Nallo");
+    assertFalse("Non-empty trees equal after addion in different order",
       nonEmptyTree.equals(anotherNonEmptyTree));
   }
  
@@ -120,15 +120,15 @@ public class BinarySearchTreeTest {
   @Test
   public void testToArrayList() {
      ArrayList<String> alist = new ArrayList<String>();
-     BinarySearchTree  atree = new BinarySearchTree();
-     atree.insert("e");
-     atree.insert("a");
-     atree.insert("b");
-     atree.insert("d");
-     atree.insert("h");
-     atree.insert("g");
-     atree.insert("f");
-     atree.insert("k"); 
+     BST  atree = new BST();
+     atree.add("e");
+     atree.add("a");
+     atree.add("b");
+     atree.add("d");
+     atree.add("h");
+     atree.add("g");
+     atree.add("f");
+     atree.add("k"); 
      alist.add("a");
      alist.add("b");
      alist.add("d");
@@ -140,9 +140,9 @@ public class BinarySearchTreeTest {
      assertTrue("ArrayList", alist.toString().equals(atree.toArrayList().toString()));
      alist.add("x");
      assertFalse("ArrayList", alist.toString().equals(atree.toArrayList().toString()));
-     atree.insert("x");
+     atree.add("x");
      assertTrue("ArrayList", alist.toString().equals(atree.toArrayList().toString()));
-     atree.insert("y");
+     atree.add("y");
      assertFalse("ArrayList", alist.toString().equals(atree.toArrayList().toString()));
   }
   
@@ -153,20 +153,20 @@ public class BinarySearchTreeTest {
     assertTrue("Non-empty tree equals itself",
       nonEmptyTree.sameContents(nonEmptyTree));
     // Two empty trees are equal
-    BinarySearchTree anotherEmptyTree = new BinarySearchTree();
+    BST anotherEmptyTree = new BST();
     assertTrue("Two empty trees are equal", anotherEmptyTree.sameContents(emptyTree));
     // A tree is equal to a copy of itself
-    BinarySearchTree anotherNonEmptyTree = nonEmptyTree.copy();
+    BST anotherNonEmptyTree = nonEmptyTree.copy();
     assertTrue("Non-empty tree equals copy of itself",
       anotherNonEmptyTree.sameContents(nonEmptyTree));
     // Inserting in different order --> Not (necessarily) equal
-    nonEmptyTree.insert("Nallo");
-    nonEmptyTree.insert("Njulla");
-    nonEmptyTree.insert("Kaskasapakte");
-    anotherNonEmptyTree.insert("Kaskasapakte");
-    anotherNonEmptyTree.insert("Nallo");
-    anotherNonEmptyTree.insert("Njulla");
-    assertTrue("Non-empty trees equal after insertion in different order",
+    nonEmptyTree.add("Nallo");
+    nonEmptyTree.add("Njulla");
+    nonEmptyTree.add("Kaskasapakte");
+    anotherNonEmptyTree.add("Kaskasapakte");
+    anotherNonEmptyTree.add("Nallo");
+    anotherNonEmptyTree.add("Njulla");
+    assertTrue("Non-empty trees equal after addion in different order",
       nonEmptyTree.sameContents(anotherNonEmptyTree));
   }
   
