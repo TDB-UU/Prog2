@@ -148,8 +148,10 @@ public class BSTTest {
      alist.add("x");
      assertFalse("ArrayList", alist.toString().equals(atree.toArrayList().toString()));
      atree.add("x");
+     atreeCopy.add("x");
      assertTrue("ArrayList", alist.toString().equals(atree.toArrayList().toString()));
      atree.add("y");
+     atreeCopy.add("y");
      assertFalse("ArrayList", alist.toString().equals(atree.toArrayList().toString()));
      assertTrue(atree.equals(atreeCopy));
   }
