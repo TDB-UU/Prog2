@@ -46,11 +46,13 @@ public class ParserTest {
     verifyCalculation(1.90929743, "(1=x) + sin(2=y)");
     verifyCalculation(1.0, "x");
     verifyCalculation(2.0, "y");
+    verifyCalculation(1, "(((((((1=z)))))))");
   }
   
   @Test
   public void testMultipleAssignments() {
 	  verifyCalculation(7.0, "7 = x = y = z");
+	  verifyCalculation(3, "1+2=a=b=c");
 	  verifyCalculation(7.0, "x");
 	  verifyCalculation(7.0, "y");
 	  verifyCalculation(7.0, "z");

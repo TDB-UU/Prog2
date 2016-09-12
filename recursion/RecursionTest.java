@@ -68,13 +68,15 @@ public class RecursionTest {
   @Test
   public void testLargest() {
     // Index 0 --> First element
-    int [] testArray = {1};    
+    int [] testArray = {1};
     assertEquals("Largest in array of length 1", 1,
             Recursion.largest(testArray, 0));
     int [] longerTestArray = {5, 7, 0, 32, 45};
+    int [] longerTestArrayCopy = longerTestArray.clone();
     assertEquals("Largest of the first element in longer array", 5,
             Recursion.largest(longerTestArray, 0));
     int [] negativeTestArray = {-57, -74, -106, -32, -45};
+    int [] negativeTestArrayCopy = negativeTestArray.clone();
     assertEquals("Largest in negative array", -32,
             Recursion.largest(negativeTestArray, 4));
     
@@ -83,6 +85,12 @@ public class RecursionTest {
     assertEquals("Largest 2", 7, Recursion.largest(longerTestArray, 2));
     assertEquals("Largest 3", 32, Recursion.largest(longerTestArray, 3));
     assertEquals("Largest 4", 45, Recursion.largest(longerTestArray, 4));
+    
+    // Verify that the arrays were not changed by largest
+    assertArrayEquals("Largest changed array with positive numbers",
+    		longerTestArray, longerTestArrayCopy);
+    assertArrayEquals("Largest changed array with negative numbers",
+    		negativeTestArray, negativeTestArrayCopy);
   }
   
   
@@ -96,9 +104,9 @@ public class RecursionTest {
     checkReverseNumbers("254685", "\\s?254685\\s{0,2}", "1 number > 10");
 
     // Several numbers -> The numbers in reverse order
-    checkReverseNumbers("232\n56\n94\n85\n123654\n2\n5\n985",
-    "\\s?985\\s{1,2}5\\s{1,2}2\\s{1,2}123654\\s{1,2}85\\s{1,2}94\\s{1,2}56\\s{1,2}232\\s{0,2}",
-    "Several numbers");
+    checkReverseNumbers("232 56 94 85 123654 2 5 985",
+    		"\\s?985\\s{1,2}5\\s{1,2}2\\s{1,2}123654\\s{1,2}85\\s{1,2}94\\s{1,2}56\\s{1,2}232\\s{0,2}",
+    		"Several numbers");
     
     // Non-digit -> Empty string (up to 2 whitespaces)
     checkReverseNumbers("apa", "\\s{0,2}", "No numbers");
