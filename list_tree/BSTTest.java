@@ -17,12 +17,13 @@ import static org.junit.Assert.*;
 @RunWith(JUnit4.class)
 public class BSTTest {
   
-  BST nonEmptyTree;
-  BST emptyTree;
+  BST nonEmptyTree, nonEmptyTreeCopy;
+  BST emptyTree, emptyTreeCopy;
   
   @Before
   public void setUp() {
     emptyTree = new BST();
+    emptyTreeCopy = emptyTree.copy();
     nonEmptyTree = new BST();
     nonEmptyTree.add("Keron");
     nonEmptyTree.add("Akka");
@@ -32,12 +33,14 @@ public class BSTTest {
     nonEmptyTree.add("Drakryggen");
     nonEmptyTree.add("Stour Jierta");
     nonEmptyTree.add("Unna Sievgok");
+    nonEmptyTreeCopy = nonEmptyTree.copy();
   }
   
   @Test
   public void testSmallestFromNonEmptytree(){
      assertEquals("Smallest in non-empty tree  'Akka'",
       nonEmptyTree.smallest(), "Akka");
+     assertTrue(nonEmptyTree.equals(nonEmptyTreeCopy));
   }
   
     
@@ -50,12 +53,14 @@ public class BSTTest {
   public void testSize() {
     assertEquals("Size of empty tree", 0, emptyTree.size());
     assertEquals("Size of non-empty tree", 8, nonEmptyTree.size());
+    assertTrue(nonEmptyTree.equals(nonEmptyTreeCopy));
   }
   
   @Test
   public void testHeight() {
     assertEquals("Height of empty tree", 0, emptyTree.height());
     assertEquals("Height of non-empty tree", 4, nonEmptyTree.height());
+    assertTrue(nonEmptyTree.equals(nonEmptyTreeCopy));
   }
   
   @Test
@@ -70,6 +75,7 @@ public class BSTTest {
       nonEmptyTree.contains("Stour Jierta"));
     assertTrue("Non-empty tree contains 'Akka'",
       nonEmptyTree.contains("Akka"));
+    assertTrue(nonEmptyTree.equals(nonEmptyTreeCopy));
   }
   
   @Test
@@ -137,6 +143,7 @@ public class BSTTest {
      alist.add("g");
      alist.add("h");   
      alist.add("k");
+     BST atreeCopy = atree.copy();
      assertTrue("ArrayList", alist.toString().equals(atree.toArrayList().toString()));
      alist.add("x");
      assertFalse("ArrayList", alist.toString().equals(atree.toArrayList().toString()));
@@ -144,6 +151,7 @@ public class BSTTest {
      assertTrue("ArrayList", alist.toString().equals(atree.toArrayList().toString()));
      atree.add("y");
      assertFalse("ArrayList", alist.toString().equals(atree.toArrayList().toString()));
+     assertTrue(atree.equals(atreeCopy));
   }
   
   @Test
@@ -168,6 +176,7 @@ public class BSTTest {
     anotherNonEmptyTree.add("Njulla");
     assertTrue("Non-empty trees equal after addion in different order",
       nonEmptyTree.sameContents(anotherNonEmptyTree));
+    assertTrue(nonEmptyTree.equals(nonEmptyTreeCopy));
   }
   
   @Test
@@ -175,6 +184,7 @@ public class BSTTest {
     assertEquals("Internal path length of empty tree", 0, emptyTree.ipl());
     assertEquals("Internal path length of non-empty tree", 23,
       nonEmptyTree.ipl());
+    assertTrue(nonEmptyTree.equals(nonEmptyTreeCopy));
   }
   
 }
