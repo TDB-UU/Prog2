@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
  * (1TD722): Numeric calculator.
  *
  * @author Malin Kallen
- * @version 6
+ * @version 2016-09-15
  */
 @RunWith(JUnit4.class)
 public class ParserTest {
@@ -36,6 +36,9 @@ public class ParserTest {
     verifyCalculation(1.0, "sin(2)*sin(2) + cos(2)*cos(2)");
     verifyCalculation(-1.0, "1+-2");
     verifyCalculation(3.0, "1--2");
+    verifyCalculation(-5.0, "-5");
+    verifyCalculation(-5.0, "-(2+3)");
+    verifyCalculation(-1.0, "-cos(1+1-2)");
   }
   
   @Test
