@@ -58,7 +58,7 @@ public class CalculatorTest {
    * @param statement Statement which should cause an evaluation error
    */
   private void verifyEvaluationError(String statement) {
-    verifyStatement("> \\*\\*\\*\\s*[E|e]valuation error.+\n> 1477.0\n", statement + "1477\n", 2);
+    verifyStatement(">\\s*\\*\\*\\*\\s*[E|e]valuation error.+\n> 1477.0\n", statement + "1477\n", 2);
   }
   
   /**
@@ -70,7 +70,7 @@ public class CalculatorTest {
    * @param statement Statement which should cause an evaluation error
    */
   private void verifySyntaxError(String statement) {
-    verifyStatement("> \\*\\*\\*\\s*[S|s]yntax error.+\n.+\n> 1658.0\n", statement + "1658\n", 2);
+    verifyStatement(">\\s*\\*\\*\\*\\s*[S|s]yntax error.+\n.+\n> 1658.0\n", statement + "1658\n", 2);
   }
   
   /**
