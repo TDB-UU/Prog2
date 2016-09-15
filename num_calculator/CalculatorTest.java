@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
  * (1TD722): Numeric calculator.
  *
  * @author Malin Kallen
- * @version 5
+ * @version 2016-09-15
  */
 @RunWith(JUnit4.class)
 public class CalculatorTest {
@@ -33,14 +33,18 @@ public class CalculatorTest {
   }
 
   @Test
-  public void testException() {
+  public void testSyntaxException() {
     verifySyntaxError("2++3\n");
     verifySyntaxError("1**2\n");
-    verifyEvaluationError("1/0\n");
-    verifyEvaluationError("1+2*k-4\n");
     verifySyntaxError("1+2=3+4**x - 1/0\n");
     verifySyntaxError("1+2*(3-1 a\n");
     verifySyntaxError("1+2+3+\n");
+  }
+  
+  @Test
+  public void testEvaluationException() {
+    verifyEvaluationError("1/0\n");
+    verifyEvaluationError("1+2*k-4\n");
   }
   
   @After
