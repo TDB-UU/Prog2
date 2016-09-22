@@ -156,8 +156,11 @@ public class BSTTest {
       anotherNonEmptyTree.sameContents(nonEmptyTree));
     // Inserting in different order --> Not (necessarily) equal
     nonEmptyTree.add("Nallo");
+    nonEmptyTreeCopy.add("Nallo");
     nonEmptyTree.add("Njulla");
+    nonEmptyTreeCopy.add("Njulla");
     nonEmptyTree.add("Kaskasapakte");
+    nonEmptyTreeCopy.add("Kaskasapakte");
     anotherNonEmptyTree.add("Kaskasapakte");
     anotherNonEmptyTree.add("Nallo");
     anotherNonEmptyTree.add("Njulla");
