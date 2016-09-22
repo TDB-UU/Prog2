@@ -39,6 +39,8 @@ public class ParserTest {
     verifyCalculation(-5.0, "-5");
     verifyCalculation(-5.0, "-(2+3)");
     verifyCalculation(-1.0, "-cos(1+1-2)");
+    verifyCalculation(6.0, "2 + 4 - 5 + 8 - 3");
+    verifyCalculation(60.0, "2*9/3*8/4*5");
   }
   
   @Test
