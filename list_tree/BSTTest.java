@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
  * (1TD722): Small exercises on lists and binary search trees.
  *
  * @author Malin Kallen, Tom Smedsaas
- * @version 5
+ * @version 2016-09-22
  */
 @RunWith(JUnit4.class)
 public class BSTTest {
@@ -60,21 +60,6 @@ public class BSTTest {
   public void testHeight() {
     assertEquals("Height of empty tree", 0, emptyTree.height());
     assertEquals("Height of non-empty tree", 4, nonEmptyTree.height());
-    assertTrue(nonEmptyTree.equals(nonEmptyTreeCopy));
-  }
-  
-  @Test
-  public void testContains() {
-    assertFalse("Empty tree contains", emptyTree.contains("Keron"));
-    assertFalse("Empty tree contains", emptyTree.contains("Stour Jierta"));
-    assertFalse("Non-empty tree contains 'Lapporten'",
-      nonEmptyTree.contains("Lapporten"));
-    assertTrue("Non-empty tree contains 'Keron'",
-      nonEmptyTree.contains("Keron"));
-    assertTrue("Non-empty tree contains 'Stour Jierta'",
-      nonEmptyTree.contains("Stour Jierta"));
-    assertTrue("Non-empty tree contains 'Akka'",
-      nonEmptyTree.contains("Akka"));
     assertTrue(nonEmptyTree.equals(nonEmptyTreeCopy));
   }
   
