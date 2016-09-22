@@ -10,7 +10,7 @@ import org.junit.runners.JUnit4;
  * (1TD722): Small exercises on lists and binary search trees.
  *
  * @author Malin Kallen, Tom Smedsaas, Johan Ofverstedt
- * @version 7
+ * @version 2016-09-22
  */
 @RunWith(JUnit4.class)
 public class SortedListTest {
@@ -139,10 +139,19 @@ public class SortedListTest {
      assertEquals("Value 40 in non-empty list", 2, nonEmptyList.indexOf(40));
      assertEquals("Value 52 in non-empty list", 3, nonEmptyList.indexOf(52));
      assertEquals("Value 100 in non-empty list", 4, nonEmptyList.indexOf(100)); 
-     assertEquals("Value 99 in non-empty list", -1, nonEmptyList.indexOf(99));
      // Verify that indexOf didn't modify the list
      assertTrue("List modified by indexOf.",
              nonEmptyList.equals(nonEmptyListCopy));
+  }
+  
+  @Test(expected=SortedList.ListException.class)
+  public void testIndexOf_emptyList() {
+      emptyList.indexOf(0);
+  }
+  
+  @Test(expected=SortedList.ListException.class)
+  public void testIndexOf_nonExistentNumber() {
+      nonEmptyList.indexOf(99);
   }
   
   @Test
